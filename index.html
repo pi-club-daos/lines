@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<script>
+    async function myFunction(){
+    let photo = document.getElementById("image-file").files[0];
+    let formData = new FormData();
+    formData.append("image", photo);
+    const myRequest = new Request('http://topcatthomas.pythonanywhere.com/', {
+  method: 'POST',
+     body: formData
+});
+    await fetch(myRequest)
+  .then(response => response.blob())
+  .then(myBlob => {
+   let myImage = document.getElementById("img");
+    myImage.src = URL.createObjectURL(myBlob);
+  });
+    }
+</script>
+ <img src="" alt="" id="img">
+<input id="image-file" type="file" />
+ <button onclick="myFunction()">convert</button>
